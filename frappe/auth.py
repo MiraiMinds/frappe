@@ -361,14 +361,14 @@ class CookieManager:
 		if frappe.session.sid:
 			self.set_cookie("sid", frappe.session.sid, expires=expires, httponly=True)
 
-	def set_cookie(self, key, value, expires=None, secure=False, httponly=False, samesite="Lax"):
+	def set_cookie(self, key, value, expires=None, secure=False, httponly=False, samesite="None"):
 		if not secure and hasattr(frappe.local, "request"):
 			secure = frappe.local.request.scheme == "https"
 
 		self.cookies[key] = {
 			"value": value,
 			"expires": expires,
-			"secure": secure,
+			"secure": True,
 			"httponly": httponly,
 			"samesite": samesite,
 		}
